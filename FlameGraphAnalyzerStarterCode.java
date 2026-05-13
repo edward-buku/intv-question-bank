@@ -91,84 +91,18 @@ class ProcessNote {
 class FlameGraphAnalyzer {
     
     public static void main(String[] args) {
-        analyzeFlameGraph(makeTestCase1());
-        analyzeFlameGraph(makeTestCase2());
-        analyzeFlameGraph(makeTestCase3());
-        analyzeFlameGraph(makeTestCase4());
-        analyzeFlameGraph(makeTestCase5());
-        analyzeFlameGraph(makeTestCase6());
-        analyzeFlameGraph(makeTestCase7());
+        // Uncomment test cases as you build your solution
+        //analyzeFlameGraph(makeTestCase1());
+        //analyzeFlameGraph(makeTestCase2());
+        //analyzeFlameGraph(makeTestCase3());
+        // analyzeFlameGraph(makeTestCase4());
+        // analyzeFlameGraph(makeTestCase5());
+        // analyzeFlameGraph(makeTestCase6());
+        // analyzeFlameGraph(makeTestCase7());
     }
     
     private static void analyzeFlameGraph(List<FlameBar> graph) {
-        if (graph == null || graph.isEmpty()) {
-            System.out.println("Peak Concurrency: 0");
-            return;
-        }
         
-        Collections.sort(graph, (a, b) -> {
-             if (a.getLengthOfDuration() != a.getLengthOfDuration()) {
-                return b.getLengthOfDuration() - a.getLengthOfDuration();
-             }
-             
-             return a.getName().compareTo(b.getName());
-         });
-        
-        int maxDur = graph.get(0).getLengthOfDuration();
-        
-        Queue<ProcessNote> pq = new PriorityQueue<>((a, b) -> {
-            if (b.getLengthOfNames() != a.getLengthOfNames()) {
-                return b.getLengthOfNames() - a.getLengthOfNames();
-            }
-            
-            return a.getTime() - b.getTime();
-        });
-        
-        int maxStack = 1;
-        
-        for (int i = 0; i <= maxDur; ++i) {
-            ProcessNote note = new ProcessNote(i, new ArrayList<>());
-            for (FlameBar bar : graph) {
-                if (i >= bar.getLengthOfDuration()) continue;
-                if (bar.getDurationStatusAt(i) == 1) note.pushToNames(bar.getName());
-            }
-            maxStack = Math.max(note.getLengthOfNames(), maxStack);
-            if (maxStack == note.getLengthOfNames()) pq.offer(note);
-        }
-        
-        if (pq.isEmpty()) {
-            System.out.println("Peak Concurrency: 0");
-            return;
-        }
-        
-        int maxEntries = pq.peek().getLengthOfNames();
-        System.out.println("Peak Concurrency: " + maxEntries);
-        Map<String, int[]> flameStackMap = new TreeMap<>();
-        
-        while (pq.peek() != null && pq.peek().getLengthOfNames() == maxEntries) {
-            ProcessNote note = pq.poll();
-            String key = note.getNamesArray();
-            
-            if (!flameStackMap.containsKey(key)) {
-                flameStackMap.put(key, new int[]{note.getTime(), note.getTime()});
-                continue;
-            }
-            flameStackMap.put(key, new int[]{flameStackMap.get(key)[0], note.getTime()});
-        }
-        
-        List<String> flameMapKeyList = new ArrayList<>(flameStackMap.keySet());
-        
-        Collections.sort(flameMapKeyList, (a, b) -> {
-            int[] durA = flameStackMap.get(a);
-            int[] durB = flameStackMap.get(b);
-            int diff = (durB[1] - durB[0]) - (durA[1] - durA[0]);
-            return  diff == 0 ? durA[0] - durB[0] : diff;
-        });
-        
-        
-        for (String key : flameMapKeyList) {
-            System.out.println(String.format("Time [%d, %d]: %s", flameStackMap.get(key)[0], flameStackMap.get(key)[1], key));
-        }
     }
     
     private static List<FlameBar> makeTestCase1() {
