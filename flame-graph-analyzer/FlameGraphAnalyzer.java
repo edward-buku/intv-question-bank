@@ -107,7 +107,7 @@ class FlameGraphAnalyzer {
         }
         
         Collections.sort(graph, (a, b) -> {
-             if (a.getLengthOfDuration() != a.getLengthOfDuration()) {
+             if (a.getLengthOfDuration() != b.getLengthOfDuration()) {
                 return b.getLengthOfDuration() - a.getLengthOfDuration();
              }
              
