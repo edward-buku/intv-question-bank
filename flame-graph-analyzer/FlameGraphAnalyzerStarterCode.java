@@ -53,39 +53,6 @@ import java.util.*;
 class FlameBar {
     private final String name;
     private final List<Integer> duration;
-    
-    public FlameBar(String name, List<Integer> duration) {
-        this.name = name;
-        this.duration = duration;
-    }
-    
-    public String getName() { return name; }
-    
-    public int getDurationStatusAt(int i) { return duration.get(i); }
-    
-    public int getLengthOfDuration() { return duration.size(); }
-}
-
-class ProcessNote {
-    private final int time;
-    private final List<String> names;
-
-    public ProcessNote(int time, List<String> names) {
-        this.time = time;
-        this.names = names;
-    }
-    
-    public int getTime() { return time; }
-
-    public int getLengthOfNames() { return names.size(); }
-
-    public void pushToNames(String name) {
-        names.add(name);
-    }
-    
-    public String getNamesArray() {
-        return Arrays.toString(names.toArray());
-    }
 }
 
 class FlameGraphAnalyzer {
